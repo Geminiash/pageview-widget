@@ -1,0 +1,39 @@
+{
+  "name": "pageview-widget",
+  "version": "1.0.0",
+  "description": "极轻自托管阅读量统计：<2KB 嵌入脚本 + 零依赖 Node 后端 (node:http + node:sqlite)",
+  "type": "module",
+  "license": "MIT",
+  "packageManager": "pnpm@11.1.1",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && node scripts/build-widget.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "bench": "node scripts/bench.mjs",
+    "start": "node dist/server/index.js",
+    "dev": "tsx src/server/index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "esbuild": "^0.25.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Geminiash/pageview-widget.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Geminiash/pageview-widget/issues"
+  },
+  "homepage": "https://github.com/Geminiash/pageview-widget#readme"
+}
