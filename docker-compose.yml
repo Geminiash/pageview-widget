@@ -1,0 +1,21 @@
+services:
+  pageview-widget:
+    build: .
+    image: pageview-widget:latest
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      PV_DB_PATH: /app/data/pageview.db
+    ports:
+      # 只绑定本机回环，外网请经反代（Nginx/Caddy）转发
+      - "127.0.0.1:8787:8787"
+    volumes:
+      - ./data:/app/data
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8787/api/count?paths="]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
